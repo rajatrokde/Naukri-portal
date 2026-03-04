@@ -15,6 +15,6 @@ spec:
       containers:
         - name: backend
           image: career-backend:latest
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: never
           ports:
             - containerPort: 5000
