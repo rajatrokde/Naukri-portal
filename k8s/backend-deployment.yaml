@@ -13,7 +13,8 @@ spec:
         app: backend
     spec:
       containers:
-      - name: backend
-        image: your-dockerhub/backend:latest
-        ports:
-        - containerPort: 5000
+        - name: backend
+          image: career-backend:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 5000

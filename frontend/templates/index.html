@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Premium Career Portal</title>
+<style>
+body {
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#1e3c72,#2a5298);
+    font-family:sans-serif;
+}
+
+.card {
+    background:rgba(255,255,255,0.1);
+    backdrop-filter:blur(15px);
+    padding:40px;
+    border-radius:20px;
+    width:350px;
+    color:white;
+    text-align:center;
+    box-shadow:0 20px 40px rgba(0,0,0,0.4);
+}
+
+input {
+    width:100%;
+    padding:12px;
+    margin:10px 0;
+    border-radius:10px;
+    border:none;
+}
+
+button {
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    background:#00c6ff;
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+button:hover {
+    background:#0072ff;
+}
+
+.dashboard {
+    display:none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card" id="loginCard">
+    <h2>Login</h2>
+    <form id="loginForm">
+        <input type="email" id="email" placeholder="Enter Email" required>
+        <input type="password" id="password" placeholder="Enter Password" required>
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+<div class="card dashboard" id="dashboard">
+    <h2>Welcome 🚀</h2>
+    <p>Login Successful</p>
+    <button onclick="logout()">Logout</button>
+</div>
+
+<script>
+document.getElementById("loginForm").addEventListener("submit", function(e) {
+    e.preventDefault(); // prevent page reload
+
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    fetch("http://backend-service/login", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ email: email, password: password })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === "success") {
+            alert("Login Successful 🎉");
+            document.getElementById("loginCard").style.display = "none";
+            document.getElementById("dashboard").style.display = "block";
+        } else {
+            alert(data.message);
+        }
+    })
+    .catch(error => {
+        alert("Cannot connect to backend ❌");
+        console.error(error);
+    });
+});
+
+function logout() {
+    document.getElementById("dashboard").style.display = "none";
+    document.getElementById("loginCard").style.display = "block";
+}
+</script>
+
+</body>
+</html>
