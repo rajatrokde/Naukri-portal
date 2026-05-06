@@ -15,6 +15,6 @@ spec:
       containers:
         - name: backend
           image: rajatrokde/career-backend:latest
-          imagePullPolicy: always
+          imagePullPolicy: Always
           ports:
             - containerPort: 5000
