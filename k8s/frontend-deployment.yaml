@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: career-frontend:latest
+        image: rajatrokde/career-frontend:latest
         imagePullPolicy: Never
         ports:
         - containerPort: 80
